@@ -1,0 +1,36 @@
+{
+    "name": "azjezz/sweet",
+    "description": "Sweet ! a strict typed hack service container and locator. ",
+    "type": "library",
+    "require": {
+        "hhvm": "^4.0",
+        "hhvm/hsl": "^4.0"
+    },
+    "require-dev": {
+        "hhvm/hacktest": "^1.4",
+        "hhvm/hhast": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sweet\\": "src/Sweet/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint": "hhast-lint -v src/Sweet/",
+        "type-check": "hh_client src/Sweet/",
+        "check": [
+            "@type-check",
+            "@lint"
+        ]
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "azjezz",
+            "email": "azjezz@protonmail.com"
+        }
+    ]
+}
