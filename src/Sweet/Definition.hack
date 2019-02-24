@@ -1,11 +1,11 @@
 namespace Sweet;
 
-final class Entry<T> {
+final class Definition<T> {
   private vec<(function(T): T)> $inflectors;
   private ?T $resolved;
 
   public function __construct(
-    private classname<T> $service,
+    private typename<T> $service,
     private Factory<T> $factory,
     private bool $shared,
   ) {
@@ -30,12 +30,12 @@ final class Entry<T> {
     return $this->shared;
   }
 
-  public function setShared(bool $shared): this {
+  public function setShared(bool $shared = true): this {
     $this->shared = $shared;
     return $this;
   }
 
-  public function getId(): classname<T> {
+  public function getService(): typename<T> {
     return $this->service;
   }
 
