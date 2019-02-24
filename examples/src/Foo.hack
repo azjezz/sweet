@@ -1,4 +1,4 @@
-namespace Examples;
+namespace Sweet\Examples;
 
 use namespace Sweet;
 
