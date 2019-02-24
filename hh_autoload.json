@@ -3,7 +3,8 @@
         "src/Sweet/"
     ],
     "rootsDev": [
-        "examples/src/"
+        "examples/src/",
+        "tests/Sweet/"
     ],
     "devFailureHandler": "Facebook\\AutoloadMap\\HHClientFallbackHandler"
 }
