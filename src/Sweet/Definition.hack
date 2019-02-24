@@ -45,6 +45,7 @@ final class Definition<T> {
 
   public function setFactory(Factory<T> $factory): this {
     $this->factory = $factory;
+    $this->resolved = null;
     return $this;
   }
 
