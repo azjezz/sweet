@@ -75,7 +75,7 @@ You can also create a factory from a function using the `Sweet\factory()` helper
 ```hack
 $container = new Sweet\Container();
 
-// lambad
+// lambda
 $container->add(Session::class, Sweet\factory(($container) ==>
   return new Session(
     $container->get(SessionStorage::class)
