@@ -21,9 +21,11 @@
     "scripts": {
         "lint": "hhast-lint -v src/Sweet/",
         "type-check": "hh_client src/Sweet/",
+        "test": "hacktest tests/",
         "check": [
             "@type-check",
-            "@lint"
+            "@lint",
+            "@test"
         ]
     },
     "license": "MIT",
