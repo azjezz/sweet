@@ -3,17 +3,19 @@ namespace Sweet;
 use namespace HH\Lib\C;
 use namespace HH\Lib\Str;
 use type Exception;
+use function get_class;
 
 final class ServiceContainer implements ServiceContainerInterface {
-  private dict<string, mixed> $entries = dict[];
+  private dict<string, mixed> $definitions = dict[];
   private vec<ServiceContainerInterface> $delegates = vec[];
+  private vec<ServiceProvider> $providers = vec[];
 
-  public function get<T>(classname<T> $service): T {
-    if (C\contains_key($this->entries, $service)) {
-      $entry = $this->entries[$service] as Entry<_>;
+  public function get<T>(typename<T> $service): T {
+    if (C\contains_key($this->definitions, $service)) {
+      $def = $this->definitions[$service] as Definition<_>;
       try {
         // UNSAFE
-        return $entry->resolve($this);
+        return $def->resolve($this);
       } catch (Exception $e) {
         throw new Exception\ServiceContainerException(
           Str\format(
@@ -24,6 +26,22 @@ final class ServiceContainer implements ServiceContainerInterface {
           $e->getCode(),
           $e,
         );
+      }
+    }
+
+    foreach ($this->providers as $provider) {
+      if ($provider->provide($service)) {
+        $provider->register($this);
+        // prevent stackoverflow
+        if (!C\contains_key($this->definitions, $service)) {
+          throw new Exception\ServiceContainerException(Str\format(
+            'Service provider (%s) lied about providing (%s) service.',
+            get_class($provider),
+            $service,
+          ));
+        }
+
+        return $this->get($service);
       }
     }
 
@@ -39,48 +57,64 @@ final class ServiceContainer implements ServiceContainerInterface {
     ));
   }
 
-  public function has<T>(classname<T> $service): bool {
-    if (C\contains_key($this->entries, $service)) {
+  public function has<T>(typename<T> $service): bool {
+    if (C\contains_key($this->definitions, $service)) {
       return true;
     }
+
+    foreach ($this->providers as $provider) {
+      if ($provider->provide($service)) {
+        return true;
+      }
+    }
+
     foreach ($this->delegates as $container) {
       if ($container->has($service)) {
         return true;
       }
     }
+
     return false;
   }
 
   /**
    * Proxy to add with shared as true.
    */
-  public function share<T>(classname<T> $service, Factory<T> $factory): void {
-    $this->add($service, $factory, true);
+  public function share<T>(
+    typename<T> $service,
+    Factory<T> $factory,
+  ): Definition<T> {
+    return $this->add($service, $factory, true);
   }
 
   /**
    * Add a service entry to the container.
    */
   public function add<T>(
-    classname<T> $service,
+    typename<T> $service,
     Factory<T> $factory,
     bool $shared = false,
-  ): Entry<T> {
-    return $this->entries[$service] = new Entry($service, $factory, $shared);
+  ): Definition<T> {
+    return $this->addDefinition(new Definition($service, $factory, $shared));
+  }
+
+  public function addDefinition<T>(Definition<T> $definition): Definition<T> {
+    $this->definitions[$definition->getService()] = $definition;
+    return $definition;
   }
 
   /**
    * Get a service entry to extend.
    */
-  public function extend<T>(classname<T> $service): Entry<T> {
-    if (!C\contains_key($this->entries, $service)) {
+  public function extend<T>(typename<T> $service): Definition<T> {
+    if (!C\contains_key($this->definitions, $service)) {
       throw new Exception\ServiceNotFoundException(Str\format(
         'Service (%s) is not managed by the service container.',
         $service,
       ));
     }
     // UNSAFE
-    return $this->entries[$service];
+    return $this->definitions[$service];
   }
 
   /**
@@ -89,6 +123,11 @@ final class ServiceContainer implements ServiceContainerInterface {
    */
   public function delegate(ServiceContainerInterface $container): this {
     $this->delegates[] = $container;
+    return $this;
+  }
+
+  public function register(ServiceProvider $provider): this {
+    $this->providers[] = $provider;
     return $this;
   }
 }
