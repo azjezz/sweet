@@ -84,7 +84,7 @@ $container = new Sweet\Container();
 
 // lambda
 $container->add(Session::class, Sweet\factory(($container) ==>
-  return new Session(
+  new Session(
     $container->get(SessionStorage::class)
   )
 ));
