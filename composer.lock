@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c012d9f91729d39c92c1f758fc00272",
+    "content-hash": "41a409173b5c620603d180ab35729a65",
     "packages": [
         {
             "name": "hhvm/hsl",
@@ -77,6 +77,38 @@
                 "MIT"
             ],
             "time": "2019-02-09T01:44:39+00:00"
+        },
+        {
+            "name": "facebook/fbexpect",
+            "version": "v2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/fbexpect.git",
+                "reference": "cf8afe9e17c7edb0d5694645ad93b8179d06ec5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/cf8afe9e17c7edb0d5694645ad93b8179d06ec5d",
+                "reference": "cf8afe9e17c7edb0d5694645ad93b8179d06ec5d",
+                "shasum": ""
+            },
+            "require": {
+                "facebook/difflib": "^1.0.0",
+                "hhvm": "^3.28|^4.0",
+                "hhvm/hacktest": "^1.0",
+                "hhvm/hsl": "^3.26|^4.0"
+            },
+            "require-dev": {
+                "hhvm/hhast": "^4.0",
+                "hhvm/hhvm-autoload": "^2.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unit test helpers for Facebook projects",
+            "time": "2019-02-14T22:40:45+00:00"
         },
         {
             "name": "facebook/hh-clilib",

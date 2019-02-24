@@ -8,6 +8,7 @@
     },
     "require-dev": {
         "hhvm/hacktest": "^1.4",
+        "facebook/fbexpect": "^2.5",
         "hhvm/hhast": "^4.0"
     },
     "autoload": {
