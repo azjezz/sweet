@@ -43,26 +43,27 @@ Services are defined by factories that return an instance of an object:
 
 ```hack
 
-use type Sweet\Factory;
-use type Sweet\ServiceContainerInterface;
+use namespace Sweet;
 
-class SessionStorageFactory implements Factory<SessionStorage> {
+class SessionStorageFactory implements Sweet\Factory<SessionStorage> {
   public function create(
-    ServiceContainerInterface $container
+    Sweet\ServiceContainerInterface $container
   ): SessionStorage {
     return new SessionStorage('SESSION_ID');
   }
 }
 
-class SessionFactory implements Factory<Session> {
+class SessionFactory implements Sweet\Factory<Session> {
   public function create(
-    ServiceContainerInterface $container
+    Sweet\ServiceContainerInterface $container
   ): Session {
     return new Session(
       $container->get(SessionStorage::class)
     );
   }
 }
+
+// later :
 
 $container = new Sweet\Container();
 $container->add(
@@ -181,8 +182,8 @@ To build a service provider it is as simple as implementing the service provider
 ```hack
 namespace App;
 
+use namespace Sweet;
 use namespace HH\Lib\C;
-use type Sweet;
 
 final class SessionServiceProvider extends Sweet\ServiceProvider {
   /**
