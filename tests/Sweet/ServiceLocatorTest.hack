@@ -12,6 +12,7 @@ namespace Sweet\Test;
 use namespace Sweet;
 use namespace Sweet\Examples;
 use type Facebook\HackTest\HackTest;
+use namespace His\Container\Exception;
 use function Facebook\FBExpect\expect;
 
 class ServiceLocatorTest extends HackTest {
@@ -66,7 +67,7 @@ class ServiceLocatorTest extends HackTest {
     expect(() ==> {
       $locator->get(Examples\Baz::class);
     })->toThrow(
-      Sweet\Exception\ServiceNotFoundException::class,
+      Exception\NotFoundExceptionInterface::class,
       'Service (Sweet\Examples\Baz) not found: even though it exists in the service container.',
     );
   }
@@ -78,7 +79,7 @@ class ServiceLocatorTest extends HackTest {
     expect(() ==> {
       $locator->get(Examples\Baz::class);
     })->toThrow(
-      Sweet\Exception\ServiceNotFoundException::class,
+      Exception\NotFoundExceptionInterface::class,
       'Service (Sweet\Examples\Baz) not found: the current service locator is empty...',
     );
   }
@@ -93,7 +94,7 @@ class ServiceLocatorTest extends HackTest {
     expect(() ==> {
       $locator->get(Examples\Baz::class);
     })->toThrow(
-      Sweet\Exception\ServiceNotFoundException::class,
+      Exception\NotFoundExceptionInterface::class,
       'Service (Sweet\Examples\Baz) not found: the current service locator only knows about the '.
       'Sweet\Examples\Foo, Sweet\Examples\Bar services.',
     );

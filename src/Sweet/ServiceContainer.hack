@@ -9,6 +9,7 @@
 
 namespace Sweet;
 
+use namespace His\Container;
 use namespace HH\Lib\C;
 use namespace HH\Lib\Str;
 use type Exception;
@@ -16,7 +17,7 @@ use function get_class;
 
 final class ServiceContainer implements ServiceContainerInterface {
   private dict<string, mixed> $definitions = dict[];
-  private vec<ServiceContainerInterface> $delegates = vec[];
+  private vec<Container\ContainerInterface> $delegates = vec[];
   private vec<ServiceProvider> $providers = vec[];
 
   public function get<T>(typename<T> $service): T {
@@ -130,7 +131,7 @@ final class ServiceContainer implements ServiceContainerInterface {
    * Delegate a backup container to be checked for services if it
    * cannot be resolved via this container.
    */
-  public function delegate(ServiceContainerInterface $container): this {
+  public function delegate(Container\ContainerInterface $container): this {
     $this->delegates[] = $container;
     return $this;
   }

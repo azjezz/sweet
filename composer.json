@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "hhvm": "^4.0",
-        "hhvm/hsl": "^4.0"
+        "hhvm/hsl": "^4.0",
+        "his/container": "^0.1.0"
     },
     "require-dev": {
         "hhvm/hacktest": "^1.4",

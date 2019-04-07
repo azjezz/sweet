@@ -12,6 +12,7 @@ namespace Sweet\Test;
 use namespace Sweet;
 use namespace Sweet\Examples;
 use type Facebook\HackTest\HackTest;
+use namespace His\Container\Exception;
 use function Facebook\FBExpect\expect;
 
 class ServiceContainerTest extends HackTest {
@@ -73,7 +74,7 @@ class ServiceContainerTest extends HackTest {
     $container = new Sweet\ServiceContainer();
     expect(() ==> $container->get(Examples\Foo::class))
       ->toThrow(
-        Sweet\Exception\ServiceNotFoundException::class,
+        Exception\NotFoundExceptionInterface::class,
         'Service (Sweet\Examples\Foo) is not managed by the service container or delegates.',
       );
   }
@@ -85,7 +86,7 @@ class ServiceContainerTest extends HackTest {
     }));
     expect(() ==> $container->get(Examples\Foo::class))
       ->toThrow(
-        Sweet\Exception\ServiceContainerException::class,
+        Exception\ContainerExceptionInterface::class,
         'Exception thrown while trying to create service (Sweet\Examples\Foo) : foo',
       );
   }
@@ -136,7 +137,7 @@ class ServiceContainerTest extends HackTest {
     expect(() ==> {
       $container->extend(Examples\Foo::class);
     })->toThrow(
-      Sweet\Exception\ServiceNotFoundException::class,
+      Exception\NotFoundExceptionInterface::class,
       'Service (Sweet\Examples\Foo) is not managed by the service container.',
     );
   }

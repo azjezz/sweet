@@ -9,8 +9,6 @@
 
 namespace Sweet;
 
-interface ServiceContainerInterface {
-  public function get<T>(typename<T> $id): T;
+use namespace His\Container;
 
-  public function has<T>(typename<T> $id): bool;
-}
+interface ServiceContainerInterface extends Container\ContainerInterface {}

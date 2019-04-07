@@ -9,6 +9,10 @@
 
 namespace Sweet\Exception;
 
+use namespace His\Container\Exception;
+
 <<__Sealed(ServiceNotFoundException::class)>>
-class ServiceContainerException extends \RuntimeException {
+class ServiceContainerException
+  extends \RuntimeException
+  implements Exception\ContainerExceptionInterface {
 }

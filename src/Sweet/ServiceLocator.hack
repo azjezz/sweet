@@ -9,13 +9,14 @@
 
 namespace Sweet;
 
+use namespace His;
 use namespace HH\Lib\C;
 use namespace HH\Lib\Str;
 
 class ServiceLocator implements ServiceContainerInterface {
   public function __construct(
     private Container<string> $services,
-    private ServiceContainerInterface $container,
+    private His\Container\ContainerInterface $container,
   ) {}
 
   final public function has<T>(typename<T> $service): bool {

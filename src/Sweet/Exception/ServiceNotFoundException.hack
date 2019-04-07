@@ -9,5 +9,9 @@
 
 namespace Sweet\Exception;
 
-final class ServiceNotFoundException extends ServiceContainerException {
+use namespace His\Container\Exception;
+
+final class ServiceNotFoundException
+  extends ServiceContainerException
+  implements Exception\NotFoundExceptionInterface {
 }
