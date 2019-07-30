@@ -16,7 +16,7 @@ Sweet, a strict typed hack service container and locator !
 This package can be install with Composer.
 
 ```console
-$ composer install azjezz/sweet
+$ composer require azjezz/sweet
 ```
 
 ## Usage
@@ -378,4 +378,4 @@ If you discover a security vulnerability within Sweet, please send an e-mail to 
 
 ## License
 
-The Sweet Project is open-sourced software licensed under the MIT-licensed.
+The Sweet Project is open-sourced software licensed under the MIT license.
