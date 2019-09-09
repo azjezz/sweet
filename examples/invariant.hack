@@ -18,7 +18,7 @@ newtype RequestHandlersLocator = Sweet\ServiceLocator;
 
 <<__EntryPoint>>
 async function invariant(): Awaitable<void> {
-  Facebook\AutoloadMap\initialize();
+  \Facebook\AutoloadMap\initialize();
 
   $container = new Sweet\ServiceContainer();
   $container->register(new ExamplesServiceProvider());

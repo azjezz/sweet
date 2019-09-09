@@ -3,14 +3,14 @@
     "description": "Sweet ! a strict typed hack service container and locator. ",
     "type": "library",
     "require": {
-        "hhvm": "^4.0",
-        "hhvm/hsl": "^4.0",
+        "hhvm": "^4.21",
+        "hhvm/hsl": "^4.15",
         "his/container": "^0.1.0"
     },
     "require-dev": {
-        "hhvm/hacktest": "^1.4",
-        "facebook/fbexpect": "^2.5",
-        "hhvm/hhast": "^4.0"
+        "hhvm/hacktest": "^1.6",
+        "facebook/fbexpect": "^2.6",
+        "hhvm/hhast": "^4.21"
     },
     "autoload": {
         "psr-4": {

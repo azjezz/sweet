@@ -24,7 +24,7 @@ final class ServiceContainer implements ServiceContainerInterface {
     if (C\contains_key($this->definitions, $service)) {
       $def = $this->definitions[$service] as Definition<_>;
       try {
-        // UNSAFE
+        /* HH_IGNORE_ERROR[4110] */
         return $def->resolve($this);
       } catch (Exception $e) {
         throw new Exception\ServiceContainerException(
@@ -123,7 +123,7 @@ final class ServiceContainer implements ServiceContainerInterface {
         $service,
       ));
     }
-    // UNSAFE
+    /* HH_IGNORE_ERROR[4110] */
     return $this->definitions[$service];
   }
 
